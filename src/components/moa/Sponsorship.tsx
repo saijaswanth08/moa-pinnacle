@@ -30,7 +30,7 @@ const demos = ["Avg HHI $75K+", "60% Female", "35% Tourists", "All Ages"];
 
 export const Sponsorship = () => {
   return (
-    <section className="relative section-pad bg-[#050505] overflow-hidden">
+    <section id="sponsors" className="relative section-pad bg-[#050505] overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(43_53%_25%/0.15),transparent_70%)]" />
 
       <div className="container-deck relative">

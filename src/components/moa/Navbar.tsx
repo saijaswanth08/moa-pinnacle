@@ -3,12 +3,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const links = [
-  { id: "overview", label: "Overview" },
+  { id: "numbers", label: "Overview" },
   { id: "retail", label: "Retail" },
   { id: "luxury", label: "Luxury" },
   { id: "dining", label: "Dining" },
   { id: "attractions", label: "Attractions" },
   { id: "events", label: "Events" },
+  { id: "venue", label: "Venue" },
+  { id: "sponsors", label: "Sponsors" },
+  { id: "leasing", label: "Leasing" },
   { id: "contact", label: "Contact" },
 ];
 
@@ -21,7 +24,7 @@ export const Navbar = () => {
     const onScroll = () => {
       setScrolled(window.scrollY > 40);
       const y = window.scrollY + window.innerHeight / 3;
-      const sections = ["hero", ...links.map((l) => l.id)];
+      const sections = ["overview", ...links.map((l) => l.id)];
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i]);
         if (el && el.offsetTop <= y) {
@@ -51,7 +54,7 @@ export const Navbar = () => {
     >
       <nav className="container-deck flex items-center justify-between h-20">
         <button
-          onClick={() => go("hero")}
+          onClick={() => go("overview")}
           className="font-display text-2xl font-bold tracking-widest text-gold hover:text-gold-bright transition-colors"
           aria-label="Mall of America home"
         >
@@ -84,7 +87,7 @@ export const Navbar = () => {
           onClick={() => go("contact")}
           className="hidden lg:inline-flex items-center px-5 py-2.5 text-sm font-medium bg-gold text-primary-foreground hover:bg-gold-bright glow-gold-hover"
         >
-          Lease Now
+          Book a Tour
         </button>
 
         <button
