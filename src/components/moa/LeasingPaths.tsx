@@ -34,7 +34,7 @@ export const LeasingPaths = () => {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section className="relative section-pad bg-background overflow-hidden">
+    <section id="leasing" className="relative section-pad bg-background overflow-hidden">
       <div className="container-deck relative">
         <Reveal>
           <div className="text-center max-w-4xl mx-auto mb-16">

@@ -22,7 +22,7 @@ export const Hero = () => {
 
   return (
     <section
-      id="hero"
+      id="overview"
       ref={ref}
       className="cursor-glow relative min-h-screen flex items-center justify-center overflow-hidden bg-background shimmer"
     >

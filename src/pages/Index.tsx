@@ -9,9 +9,11 @@ const Luxury = lazy(() => import("@/components/moa/Luxury").then((m) => ({ defau
 const Dining = lazy(() => import("@/components/moa/Dining").then((m) => ({ default: m.Dining })));
 const Attractions = lazy(() => import("@/components/moa/Attractions").then((m) => ({ default: m.Attractions })));
 const Events = lazy(() => import("@/components/moa/Events").then((m) => ({ default: m.Events })));
+const VenueModule = lazy(() => import("@/components/moa/VenueModule").then((m) => ({ default: m.VenueModule })));
 const Sponsorship = lazy(() => import("@/components/moa/Sponsorship").then((m) => ({ default: m.Sponsorship })));
 const LeasingPaths = lazy(() => import("@/components/moa/LeasingPaths").then((m) => ({ default: m.LeasingPaths })));
 const Closing = lazy(() => import("@/components/moa/Closing").then((m) => ({ default: m.Closing })));
+const Footer = lazy(() => import("@/components/moa/Footer").then((m) => ({ default: m.Footer })));
 
 const Index = () => {
   return (
@@ -27,9 +29,11 @@ const Index = () => {
           <Dining />
           <Attractions />
           <Events />
+          <VenueModule />
           <Sponsorship />
           <LeasingPaths />
           <Closing />
+          <Footer />
         </Suspense>
       </main>
     </div>
