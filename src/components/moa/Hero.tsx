@@ -41,8 +41,9 @@ export const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
           className="eyebrow mb-6"
+          style={{ letterSpacing: "0.3em" }}
         >
-          Mall of America · Bloomington, MN
+          Bloomington, Minnesota
         </motion.div>
 
         <motion.h1
@@ -79,11 +80,34 @@ export const Hero = () => {
             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
           </button>
           <button
-            onClick={() => go("overview")}
+            onClick={() => go("events")}
             className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-foreground/40 text-foreground hover:border-gold hover:text-gold transition-colors font-medium tracking-wide"
           >
-            Explore the Property
+            View Events
           </button>
+        </motion.div>
+
+        {/* Mini stats row */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.3 }}
+          className="mt-16 flex flex-wrap items-center justify-center gap-x-10 gap-y-6 text-sm"
+        >
+          {[
+            { v: "40M", l: "Visitors" },
+            { v: "#4", l: "US Attraction" },
+            { v: "520+", l: "Stores" },
+            { v: "1.5mi", l: "from MSP" },
+          ].map((s, i) => (
+            <div key={s.l} className="flex items-center gap-10">
+              <div className="text-center">
+                <div className="font-display text-2xl text-gold">{s.v}</div>
+                <div className="text-[11px] uppercase tracking-[0.25em] text-foreground/55 mt-1">{s.l}</div>
+              </div>
+              {i < 3 && <div className="hidden sm:block h-8 w-px bg-gold/30" />}
+            </div>
+          ))}
         </motion.div>
       </div>
 

@@ -19,7 +19,7 @@ const timeline = [
 
 export const ByTheNumbers = () => {
   return (
-    <section id="overview" className="relative section-pad bg-gradient-dark overflow-hidden">
+    <section id="numbers" className="relative section-pad bg-gradient-dark overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(43_53%_20%/0.15),transparent_60%)]" />
 
       <div className="container-deck relative">
