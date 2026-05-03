@@ -1,5 +1,6 @@
 import { Reveal } from "./Reveal";
 import { Gem, Plane, Crown } from "lucide-react";
+import { ImagePlaceholder } from "./ImagePlaceholder";
 
 const cards = [
   { icon: Gem, title: "Premium Footfall", desc: "Curated visitor base with elevated purchase intent and brand affinity." },
@@ -33,6 +34,15 @@ export const Luxury = () => {
             no standalone store can match.
           </p>
         </Reveal>
+
+        <div className="mt-12">
+          <ImagePlaceholder
+            icon={Crown}
+            label="LUXURY WING"
+            gradient="linear-gradient(135deg,#0A0A0A 0%,#1A0A2A 100%)"
+            height="320px"
+          />
+        </div>
 
         <div className="mt-20 grid md:grid-cols-3 gap-8">
           {cards.map((c, i) => (

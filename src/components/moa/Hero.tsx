@@ -1,41 +1,52 @@
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
-import { useEffect, useRef } from "react";
-import { Particles } from "./Particles";
+import { useState } from "react";
 
 export const Hero = () => {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const onMove = (e: MouseEvent) => {
-      const r = el.getBoundingClientRect();
-      el.style.setProperty("--mx", `${e.clientX - r.left}px`);
-      el.style.setProperty("--my", `${e.clientY - r.top}px`);
-    };
-    el.addEventListener("mousemove", onMove);
-    return () => el.removeEventListener("mousemove", onMove);
-  }, []);
-
+  const [iframeLoaded, setIframeLoaded] = useState(false);
+  const [iframeFailed, setIframeFailed] = useState(false);
   const go = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
   return (
     <section
       id="overview"
-      ref={ref}
-      className="cursor-glow relative min-h-screen flex items-center justify-center overflow-hidden bg-background shimmer"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
     >
-      {/* Layered backgrounds */}
-      <div className="absolute inset-0 bg-gradient-hero" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,hsl(43_53%_30%/0.25),transparent_50%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_70%,hsl(43_53%_20%/0.3),transparent_55%)]" />
-      <Particles count={50} />
+      {/* Video background */}
+      {!iframeFailed && (
+        <iframe
+          src="https://www.youtube.com/embed/6xKB6FRBH_M?autoplay=1&mute=1&loop=1&playlist=6xKB6FRBH_M&controls=0&showinfo=0&modestbranding=1&rel=0"
+          onLoad={() => setIframeLoaded(true)}
+          onError={() => setIframeFailed(true)}
+          allow="autoplay; encrypted-media"
+          title="MOA Background"
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%,-50%) scale(1.4)",
+            width: "100%",
+            height: "100%",
+            border: "none",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        />
+      )}
 
-      {/* Vignette */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,hsl(0_0%_0%/0.7)_100%)]" />
+      {/* Fallback / always-present radial glow */}
+      {(iframeFailed || !iframeLoaded) && (
+        <>
+          <div className="absolute inset-0 bg-background" style={{ zIndex: 0 }} />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(43_53%_30%/0.4),transparent_60%)]" style={{ zIndex: 0 }} />
+        </>
+      )}
 
-      <div className="container-deck relative z-10 text-center pt-24">
+      {/* Dark overlay */}
+      <div className="absolute inset-0" style={{ background: "rgba(0,0,0,0.65)", zIndex: 1 }} />
+
+      {/* Content */}
+      <div className="container-deck relative text-center pt-24" style={{ zIndex: 2 }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -61,7 +72,7 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.9 }}
-          className="mt-8 text-lg md:text-2xl text-foreground/70 max-w-2xl mx-auto font-light tracking-wide"
+          className="mt-8 text-lg md:text-2xl text-foreground/80 max-w-2xl mx-auto font-light tracking-wide"
         >
           40 Million Visitors. 5.6 Million Sq Ft. One Opportunity.
         </motion.p>
@@ -73,21 +84,21 @@ export const Hero = () => {
           className="mt-12 flex flex-col sm:flex-row gap-4 justify-center"
         >
           <button
-            onClick={() => go("retail")}
-            className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-gold text-primary-foreground font-medium tracking-wide glow-gold-hover hover:bg-gold-bright"
+            onClick={() => go("leasing")}
+            className="group inline-flex items-center justify-center gap-2 px-8 py-4 font-medium tracking-wide glow-gold-hover hover:bg-gold-bright"
+            style={{ background: "#C9A84C", color: "#000" }}
           >
-            Lease Your Space
+            Explore Leasing
             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
           </button>
           <button
             onClick={() => go("events")}
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-foreground/40 text-foreground hover:border-gold hover:text-gold transition-colors font-medium tracking-wide"
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-foreground text-foreground hover:border-gold hover:text-gold transition-colors font-medium tracking-wide"
           >
             View Events
           </button>
         </motion.div>
 
-        {/* Mini stats row */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -103,23 +114,24 @@ export const Hero = () => {
             <div key={s.l} className="flex items-center gap-10">
               <div className="text-center">
                 <div className="font-display text-2xl text-gold">{s.v}</div>
-                <div className="text-[11px] uppercase tracking-[0.25em] text-foreground/55 mt-1">{s.l}</div>
+                <div className="text-[11px] uppercase tracking-[0.25em] text-foreground/70 mt-1">{s.l}</div>
               </div>
-              {i < 3 && <div className="hidden sm:block h-8 w-px bg-gold/30" />}
+              {i < 3 && <div className="hidden sm:block h-8 w-px bg-gold/40" />}
             </div>
           ))}
         </motion.div>
       </div>
 
       <motion.button
-        onClick={() => go("overview")}
+        onClick={() => go("numbers")}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.6, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-foreground/60 hover:text-gold transition-colors"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-foreground/70 hover:text-gold transition-colors"
+        style={{ zIndex: 2 }}
         aria-label="Scroll down"
       >
-        <ChevronDown size={32} className="animate-scroll-hint" />
+        <ChevronDown size={32} className="animate-bounce" />
       </motion.button>
     </section>
   );
