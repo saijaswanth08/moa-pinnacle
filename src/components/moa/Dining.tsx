@@ -1,5 +1,6 @@
 import { Reveal } from "./Reveal";
-import { UtensilsCrossed, Clock } from "lucide-react";
+import { UtensilsCrossed } from "lucide-react";
+import { ImagePlaceholder } from "./ImagePlaceholder";
 
 const pills = ["Fine Dining", "Fast Casual", "Celebrity Chef Concepts"];
 
@@ -37,19 +38,12 @@ export const Dining = () => {
           </Reveal>
 
           <Reveal delay={0.2}>
-            <div className="relative">
-              <div className="relative p-12 border border-gold/40 bg-gradient-to-br from-surface/60 to-background overflow-hidden">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,hsl(43_53%_40%/0.25),transparent_60%)]" />
-                <UtensilsCrossed className="text-gold mb-6" size={40} strokeWidth={1.2} />
-                <Clock className="text-gold/40 mb-4" size={20} />
-                <div className="font-display text-7xl md:text-8xl gradient-gold-text font-bold leading-none">3+</div>
-                <div className="mt-4 text-xl font-display">Hours</div>
-                <div className="mt-1 text-sm text-foreground/60 uppercase tracking-[0.25em]">
-                  Avg Visitor Dwell Time
-                </div>
-                <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-gold/10 blur-3xl rounded-full" />
-              </div>
-            </div>
+            <ImagePlaceholder
+              icon={UtensilsCrossed}
+              label="DINING EXPERIENCE"
+              gradient="linear-gradient(135deg,#0A0A0A 0%,#1A0800 100%)"
+              height="420px"
+            />
           </Reveal>
         </div>
       </div>

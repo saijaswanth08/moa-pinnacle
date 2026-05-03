@@ -1,5 +1,6 @@
-import { ArrowRight, Store, Sparkles, Layers } from "lucide-react";
+import { ArrowRight, Store, Sparkles, Layers, ShoppingBag } from "lucide-react";
 import { Reveal } from "./Reveal";
+import { ImagePlaceholder } from "./ImagePlaceholder";
 
 const features = [
   { icon: Store, title: "Flagship Retail", desc: "Multi-level anchor presence with prime visibility." },
@@ -31,23 +32,12 @@ export const Retail = () => {
           </Reveal>
 
           <Reveal delay={0.2}>
-            <div className="relative aspect-[4/5] overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-gold/30 via-surface to-background" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(43_53%_40%/0.3),transparent_70%)]" />
-              <div className="absolute inset-0 grid grid-cols-3 grid-rows-4 gap-px opacity-40">
-                {Array.from({ length: 12 }).map((_, i) => (
-                  <div key={i} className="bg-background/30 flex items-center justify-center">
-                    <Store className="text-gold/60" size={32} />
-                  </div>
-                ))}
-              </div>
-              <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-background via-background/80 to-transparent">
-                <div className="font-display text-4xl text-gold">520+</div>
-                <div className="text-sm text-foreground/70 uppercase tracking-wider">Brands. One Roof.</div>
-              </div>
-              <div className="absolute top-0 left-0 w-px h-full bg-gold/40" />
-              <div className="absolute top-0 right-0 w-px h-full bg-gold/40" />
-            </div>
+            <ImagePlaceholder
+              icon={ShoppingBag}
+              label="RETAIL FLOOR"
+              gradient="linear-gradient(135deg,#0A0A0A 0%,#1A1200 100%)"
+              height="500px"
+            />
           </Reveal>
         </div>
 

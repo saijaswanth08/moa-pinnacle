@@ -1,5 +1,6 @@
 import { Reveal } from "./Reveal";
 import { Gem, Plane, Crown } from "lucide-react";
+import { ImagePlaceholder } from "./ImagePlaceholder";
 
 const cards = [
   { icon: Gem, title: "Premium Footfall", desc: "Curated visitor base with elevated purchase intent and brand affinity." },
