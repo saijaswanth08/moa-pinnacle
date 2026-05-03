@@ -1,114 +1,93 @@
+import { motion } from "framer-motion";
 import { Reveal } from "./Reveal";
-import { Mic2, Building, Trees, Briefcase, ArrowRight, Download } from "lucide-react";
+import { ArrowRight, Download } from "lucide-react";
 
-const venues = [
-  {
-    icon: Mic2,
-    name: "Main Event Stage",
-    capacity: "5,000 standing / 2,500 seated",
-    sqft: "—",
-    best: "Concerts · Broadcast",
-    detail: "Full AV rig. Broadcast-ready. Green-room and hospitality access.",
-  },
-  {
-    icon: Building,
-    name: "Rotunda Plaza",
-    capacity: "7,000+",
-    sqft: "20,000",
-    best: "Brand activations",
-    detail: "360° branded environment with premium sightlines from all four levels.",
-  },
-  {
-    icon: Trees,
-    name: "Outdoor East Plaza",
-    capacity: "15,000",
-    sqft: "—",
-    best: "Open-air activations",
-    detail: "Seasonal outdoor activations adjacent to the property.",
-  },
-  {
-    icon: Briefcase,
-    name: "Private Event Suites",
-    capacity: "10–500",
-    sqft: "Varies",
-    best: "Corporate · VIP",
-    detail: "Fully catered private suites for corporate gatherings and VIP receptions.",
-  },
+const venueCards = [
+  { name: "Main Event Stage", desc: "Capacity 5,000 standing / 2,500 seated · Full AV rig · Broadcast-ready" },
+  { name: "Rotunda Plaza", desc: "360° branded environment · 20,000 sq ft · Premium sightlines" },
+  { name: "Outdoor East Plaza", desc: "Open-air events · Seasonal activations · 15,000 person capacity" },
+  { name: "Private Event Suites", desc: "Corporate meetings · VIP experiences · Fully catered" },
+];
+
+const tableRows = [
+  { venue: "Main Event Stage", capacity: "5,000 standing", sqft: "18,000 sq ft", best: "Concerts & Shows" },
+  { venue: "Rotunda Plaza", capacity: "10,000 visitors", sqft: "20,000 sq ft", best: "Brand Activations" },
+  { venue: "Outdoor East Plaza", capacity: "15,000 standing", sqft: "35,000 sq ft", best: "Festivals & Fairs" },
+  { venue: "Private Suites", capacity: "50 per suite", sqft: "800 sq ft", best: "Corporate & VIP" },
 ];
 
 export const VenueModule = () => {
   return (
-    <section id="venue" className="relative section-pad bg-[#0D0D0D] overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(43_53%_20%/0.18),transparent_60%)]" />
-
+    <section id="venue" className="relative section-pad overflow-hidden" style={{ background: "#0D0D0D" }}>
       <div className="container-deck relative">
         <Reveal>
           <div className="text-center max-w-4xl mx-auto mb-16">
             <p className="eyebrow mb-4">Venue Infrastructure</p>
-            <h2 className="heading-section">
-              World-Class <span className="gradient-gold-text">Venue Infrastructure</span>
-            </h2>
-            <p className="mt-6 text-lg text-foreground/70">
+            <h2 className="heading-section">World-Class Venue Infrastructure</h2>
+            <p className="mt-6 text-lg" style={{ color: "#A0A0A0" }}>
               Not just a mall. A multi-venue destination complex.
             </p>
           </div>
         </Reveal>
 
         <div className="grid lg:grid-cols-2 gap-10">
-          {/* Venue capability cards */}
           <div className="space-y-4">
-            {venues.map((v, i) => (
-              <Reveal key={i} delay={i * 0.08}>
-                <div className="group p-6 border border-border hover:border-gold/50 bg-background/60 transition-all duration-500 hover:-translate-y-0.5">
-                  <div className="flex items-start gap-5">
-                    <v.icon className="text-gold flex-shrink-0 mt-1" size={28} strokeWidth={1.2} />
-                    <div className="flex-1">
-                      <h3 className="font-display text-xl mb-1 group-hover:text-gold transition-colors">{v.name}</h3>
-                      <p className="text-xs uppercase tracking-[0.2em] text-foreground/50 mb-3">
-                        Capacity: {v.capacity}
-                      </p>
-                      <p className="text-sm text-foreground/70 leading-relaxed">{v.detail}</p>
-                    </div>
-                  </div>
-                </div>
-              </Reveal>
+            {venueCards.map((v, i) => (
+              <motion.div
+                key={v.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.6, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                style={{
+                  background: "#111111",
+                  borderLeft: "1px solid #C9A84C",
+                  padding: "16px",
+                }}
+              >
+                <h3 className="font-display text-xl text-foreground mb-2">{v.name}</h3>
+                <p className="text-sm" style={{ color: "#A0A0A0" }}>{v.desc}</p>
+              </motion.div>
             ))}
           </div>
 
-          {/* Specs table */}
           <Reveal delay={0.2}>
-            <div className="border border-gold/30 bg-background/60">
-              <div className="grid grid-cols-12 px-6 py-4 bg-gold/10 border-b border-gold/30 text-[11px] uppercase tracking-[0.2em] text-gold">
-                <div className="col-span-5">Venue</div>
+            <div style={{ background: "#111111", border: "1px solid rgba(201,168,76,0.2)", borderRadius: "12px" }} className="overflow-hidden">
+              <div
+                className="grid grid-cols-12 px-6 py-4 text-[11px] uppercase tracking-[0.2em]"
+                style={{ background: "rgba(201,168,76,0.12)", color: "#C9A84C", borderBottom: "1px solid rgba(201,168,76,0.3)" }}
+              >
+                <div className="col-span-4">Venue</div>
                 <div className="col-span-3">Capacity</div>
-                <div className="col-span-2">Sq Ft</div>
+                <div className="col-span-3">Sq Ft</div>
                 <div className="col-span-2">Best For</div>
               </div>
-              {venues.map((v, i) => (
+              {tableRows.map((r, i) => (
                 <div
                   key={i}
-                  className="grid grid-cols-12 px-6 py-5 border-b border-border/60 last:border-0 text-sm hover:bg-surface/40 transition-colors"
+                  className="grid grid-cols-12 px-6 py-5 text-sm"
+                  style={{ borderBottom: i < tableRows.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none" }}
                 >
-                  <div className="col-span-5 font-display text-base">{v.name}</div>
-                  <div className="col-span-3 text-foreground/70">{v.capacity}</div>
-                  <div className="col-span-2 text-foreground/70">{v.sqft}</div>
-                  <div className="col-span-2 text-gold/80 text-xs">{v.best}</div>
+                  <div className="col-span-4 font-display text-base text-foreground">{r.venue}</div>
+                  <div className="col-span-3" style={{ color: "#A0A0A0" }}>{r.capacity}</div>
+                  <div className="col-span-3" style={{ color: "#A0A0A0" }}>{r.sqft}</div>
+                  <div className="col-span-2 text-xs" style={{ color: "#C9A84C" }}>{r.best}</div>
                 </div>
               ))}
-              <div className="px-6 py-5 text-xs text-foreground/55 italic">
-                All venues include full AV, dedicated event staff, and logistics support.
-              </div>
             </div>
           </Reveal>
         </div>
 
         <Reveal delay={0.3}>
           <div className="mt-14 flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-gold text-primary-foreground font-medium tracking-wide glow-gold-hover hover:bg-gold-bright">
+            <button
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 font-medium tracking-wide glow-gold-hover hover:bg-gold-bright"
+              style={{ background: "#C9A84C", color: "#000" }}
+            >
               Book Your Venue
-              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              <ArrowRight size={18} />
             </button>
-            <button className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-foreground/40 text-foreground hover:border-gold hover:text-gold transition-colors font-medium tracking-wide">
+            <button className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-foreground/60 text-foreground hover:border-gold hover:text-gold transition-colors font-medium tracking-wide">
               <Download size={18} />
               Download Venue Kit
             </button>
