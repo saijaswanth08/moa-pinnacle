@@ -35,6 +35,15 @@ export const Luxury = () => {
           </p>
         </Reveal>
 
+        <div className="mt-12">
+          <ImagePlaceholder
+            icon={Crown}
+            label="LUXURY WING"
+            gradient="linear-gradient(135deg,#0A0A0A 0%,#1A0A2A 100%)"
+            height="320px"
+          />
+        </div>
+
         <div className="mt-20 grid md:grid-cols-3 gap-8">
           {cards.map((c, i) => (
             <Reveal key={i} delay={i * 0.12}>
