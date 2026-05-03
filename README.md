@@ -1,32 +1,61 @@
 # Mall of America — Interactive Sales Deck
 
 ## Overview
-A cinematic, browser-based interactive sales deck for Mall of America, built as a pitch tool for retail tenants, corporate sponsors, and event partners.
+
+A cinematic, browser-based interactive sales deck for Mall of America, built as a pitch tool for prospective retail tenants, corporate sponsors, and event partners. Designed to replace fragmented manual pitches with a single immersive, self-contained experience.
+
+## Live Demo
+
+[Insert Vercel URL here]
 
 ## Tech Stack
+
 - React 18 + TypeScript
-- Tailwind CSS (utility styling + responsive)
-- Framer Motion (all animations)
+
+- Tailwind CSS
+
+- Framer Motion (animations)
+
 - Lucide React (icons)
+
 - Google Fonts: Playfair Display + Inter
 
 ## Setup
-```
+
 npm install
+
 npm run dev
-```
+
+## File Structure
+
+src/components/ — one component per section (fully modular)
+
+src/hooks/ — useScrollActive, useCounterAnimation
 
 ## Design Decisions
-- Gold/black palette for luxury positioning aligned with premium tenant expectations
-- Component-per-section architecture for easy expansion and A/B testing of sections
-- IntersectionObserver-based animations (via Framer Motion `useInView`) to avoid jank on scroll
-- CSS gradient placeholders designed to look premium, not placeholder-like
+
+- Gold (#C9A84C) and black (#0A0A0A) palette for luxury positioning
+
+- Playfair Display for headings — editorial, premium feel
+
+- Component-per-section architecture for easy module expansion
+
+- IntersectionObserver-based animations — no scroll jank
+
+- Styled gradient placeholders instead of blank boxes — intentional, premium look
 
 ## AI Tools Used
-- Claude (Anthropic) — prompt engineering, copy, content strategy
-- Lovable — React component generation and layout scaffolding
+
+- Claude (Anthropic) — prompt engineering, copywriting, content strategy
+
+- Lovable — React scaffolding and component generation
+
+- Ideogram.ai — AI-generated imagery (mall interiors, luxury wing, events)
+
+## Sections
+
+Hero → By The Numbers → Retail → Luxury → Dining → Attractions → Events → Venue → Sponsorship → Leasing → Contact
 
 ## Expandability
-Each section is a self-contained component under `src/components/moa/`. New modules
-(e.g. a venue page, a brand case study) can be added by creating a new component and
-inserting a nav link — no rewrites needed.
+
+Every section is a self-contained component. New modules can be added by creating a new component file and inserting a nav link — no rewrites needed.
