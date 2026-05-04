@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Reveal } from "./Reveal";
-import { ArrowRight, Download } from "lucide-react";
+import { ArrowRight, Download, Building2 } from "lucide-react";
+import { PremiumVisual } from "./PremiumVisual";
 
 const venueCards = [
   { name: "Main Event Stage", desc: "Capacity 5,000 standing / 2,500 seated · Full AV rig · Broadcast-ready" },
@@ -27,6 +28,18 @@ export const VenueModule = () => {
             <p className="mt-6 text-lg" style={{ color: "#A0A0A0" }}>
               Not just a mall. A multi-venue destination complex.
             </p>
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.05}>
+          <div className="mb-12">
+            <PremiumVisual
+              icon={Building2}
+              label="VENUE SPACES"
+              sublabel="World-class infrastructure"
+              gradient="linear-gradient(135deg,#0A0A0A 0%,#111100 100%)"
+              height="220px"
+            />
           </div>
         </Reveal>
 
