@@ -172,6 +172,7 @@
     50% { opacity: 1; transform: scale(1.05); }
   }
   .animate-pulse-glow { animation: pulse-glow 4s ease-in-out infinite; }
+  .hero-pulse { animation: pulse-glow 6s ease-in-out infinite; }
 
   .gold-rule {
     height: 1px;
