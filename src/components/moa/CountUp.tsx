@@ -7,15 +7,16 @@ interface CountUpProps {
   prefix?: string;
   suffix?: string;
   decimals?: number;
+  staticValue?: boolean;
 }
 
-export const CountUp = ({ to, duration = 2000, prefix = "", suffix = "", decimals = 0 }: CountUpProps) => {
+export const CountUp = ({ to, duration = 2000, prefix = "", suffix = "", decimals = 0, staticValue = false }: CountUpProps) => {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-  const [val, setVal] = useState(0);
+  const inView = useInView(ref, { once: true, amount: 0.3 });
+  const [val, setVal] = useState(staticValue ? to : 0);
 
   useEffect(() => {
-    if (!inView) return;
+    if (!inView || staticValue) return;
     let raf = 0;
     const start = performance.now();
     const tick = (now: number) => {
@@ -26,12 +27,17 @@ export const CountUp = ({ to, duration = 2000, prefix = "", suffix = "", decimal
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [inView, to, duration]);
+  }, [inView, to, duration, staticValue]);
+
+  const formatted = val.toLocaleString("en-US", {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  });
 
   return (
-    <span ref={ref}>
+    <span ref={ref} style={{ opacity: inView || staticValue === false ? 1 : 0, transition: "opacity 0.6s" }}>
       {prefix}
-      {val.toFixed(decimals)}
+      {formatted}
       {suffix}
     </span>
   );

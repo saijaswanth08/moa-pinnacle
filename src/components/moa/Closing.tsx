@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Reveal } from "./Reveal";
 import { Particles } from "./Particles";
-import { CheckCircle2 } from "lucide-react";
+import { Check } from "lucide-react";
 import { z } from "zod";
 
 const interestOptions = [
@@ -97,42 +97,45 @@ export const Closing = () => {
             <div style={{ background: "#111111", border: "1px solid rgba(201,168,76,0.3)", borderRadius: "12px", padding: "2rem" }}>
               {success ? (
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                   className="flex flex-col items-center justify-center py-12 text-center"
                 >
-                  <CheckCircle2 size={48} color="#C9A84C" />
-                  <p className="mt-6 font-display text-2xl text-foreground">
-                    Thank you! Our team will be in touch within 24 hours.
+                  <Check size={56} color="#C9A84C" strokeWidth={1.5} />
+                  <h3 className="mt-6 font-display text-foreground" style={{ fontSize: "28px" }}>
+                    Message Received
+                  </h3>
+                  <p className="mt-3" style={{ color: "#A0A0A0", fontSize: "16px" }}>
+                    Our leasing team will be in touch within 24 hours.
                   </p>
                 </motion.div>
               ) : (
                 <form onSubmit={submit} className="space-y-6" noValidate>
                   <div className="grid md:grid-cols-2 gap-6">
                     <Field label="Full Name" error={errors.name}>
-                      <input type="text" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} maxLength={100} className="input-moa" />
+                      <input type="text" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} maxLength={100} className={`input-moa ${errors.name ? "input-error" : ""}`} />
                     </Field>
                     <Field label="Company" error={errors.company}>
-                      <input type="text" value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} maxLength={150} className="input-moa" />
+                      <input type="text" value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} maxLength={150} className={`input-moa ${errors.company ? "input-error" : ""}`} />
                     </Field>
                   </div>
                   <div className="grid md:grid-cols-2 gap-6">
                     <Field label="Email" error={errors.email}>
-                      <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} maxLength={255} className="input-moa" />
+                      <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} maxLength={255} className={`input-moa ${errors.email ? "input-error" : ""}`} />
                     </Field>
                     <Field label="Phone (optional)" error={errors.phone}>
-                      <input type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} maxLength={40} className="input-moa" />
+                      <input type="tel" placeholder="+1 (555) 000-0000" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} maxLength={40} className={`input-moa ${errors.phone ? "input-error" : ""}`} />
                     </Field>
                   </div>
                   <Field label="I'm interested in" error={errors.interest}>
-                    <select value={form.interest} onChange={(e) => setForm({ ...form, interest: e.target.value })} className="input-moa">
-                      <option value="">Select an option…</option>
+                    <select value={form.interest} onChange={(e) => setForm({ ...form, interest: e.target.value })} className={`input-moa ${errors.interest ? "input-error" : ""}`}>
+                      <option value="" disabled>Select your interest</option>
                       {interestOptions.map((o) => <option key={o} value={o}>{o}</option>)}
                     </select>
                   </Field>
                   <Field label="Message (optional)" error={errors.message}>
-                    <textarea value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} rows={5} maxLength={1000} className="input-moa resize-none" />
+                    <textarea value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} rows={4} maxLength={1000} className={`input-moa ${errors.message ? "input-error" : ""} resize-none`} />
                   </Field>
                   <div className="pt-2">
                     <button
@@ -157,18 +160,26 @@ export const Closing = () => {
       <style>{`
         .input-moa {
           width: 100%;
-          background: #0A0A0A;
+          background: #111111;
           border: 1px solid rgba(201,168,76,0.2);
           color: #FFFFFF;
-          padding: 0.875rem 1rem;
+          padding: 12px 16px;
           font-size: 0.95rem;
-          border-radius: 6px;
+          font-family: 'Inter', sans-serif;
+          border-radius: 8px;
           transition: border-color 0.3s, box-shadow 0.3s;
           outline: none;
         }
         .input-moa:focus {
           border-color: #C9A84C;
           box-shadow: 0 0 0 3px rgba(201,168,76,0.15);
+        }
+        .input-moa.input-error {
+          border-color: #E24B4A;
+        }
+        .input-moa option {
+          background: #111111;
+          color: #FFFFFF;
         }
       `}</style>
     </section>
@@ -179,6 +190,6 @@ const Field = ({ label, error, children }: { label: string; error?: string; chil
   <label className="block">
     <span className="block text-xs uppercase tracking-[0.2em] text-foreground/70 mb-2">{label}</span>
     {children}
-    {error && <span className="block mt-1 text-xs" style={{ color: "#ef4444" }}>{error}</span>}
+    {error && <span className="block mt-1" style={{ color: "#E24B4A", fontSize: "12px" }}>{error}</span>}
   </label>
 );

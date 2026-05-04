@@ -1,6 +1,6 @@
 import { ArrowRight, Store, Sparkles, Layers, ShoppingBag } from "lucide-react";
 import { Reveal } from "./Reveal";
-import { ImagePlaceholder } from "./ImagePlaceholder";
+import { PremiumVisual } from "./PremiumVisual";
 
 const features = [
   { icon: Store, title: "Flagship Retail", desc: "Multi-level anchor presence with prime visibility." },
@@ -32,10 +32,11 @@ export const Retail = () => {
           </Reveal>
 
           <Reveal delay={0.2}>
-            <ImagePlaceholder
+            <PremiumVisual
               icon={ShoppingBag}
               label="RETAIL FLOOR"
-              gradient="linear-gradient(135deg,#0A0A0A 0%,#1A1200 100%)"
+              sublabel="520+ stores · 4 levels"
+              gradient="linear-gradient(135deg,#0A0A0A 0%,#1A1200 40%,#2A1A00 100%)"
               height="500px"
             />
           </Reveal>

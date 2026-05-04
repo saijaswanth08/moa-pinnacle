@@ -1,6 +1,6 @@
 import { Reveal } from "./Reveal";
 import { UtensilsCrossed } from "lucide-react";
-import { ImagePlaceholder } from "./ImagePlaceholder";
+import { PremiumVisual } from "./PremiumVisual";
 
 const pills = ["Fine Dining", "Fast Casual", "Celebrity Chef Concepts"];
 
@@ -38,10 +38,11 @@ export const Dining = () => {
           </Reveal>
 
           <Reveal delay={0.2}>
-            <ImagePlaceholder
+            <PremiumVisual
               icon={UtensilsCrossed}
               label="DINING EXPERIENCE"
-              gradient="linear-gradient(135deg,#0A0A0A 0%,#1A0800 100%)"
+              sublabel="50+ restaurants · 3.5hr avg dwell"
+              gradient="linear-gradient(135deg,#0A0A0A 0%,#1A0800 40%,#2A1000 100%)"
               height="420px"
             />
           </Reveal>

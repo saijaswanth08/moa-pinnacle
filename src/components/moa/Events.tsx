@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Reveal } from "./Reveal";
 import { ArrowRight, Music, Megaphone, Building2, Plus } from "lucide-react";
+import { PremiumVisual } from "./PremiumVisual";
 
 const cards = [
   {
@@ -54,12 +55,24 @@ export const Events = () => {
 
       <div className="container-deck relative">
         <Reveal>
-          <div className="text-center max-w-4xl mx-auto mb-16">
+          <div className="text-center max-w-4xl mx-auto mb-12">
             <p className="eyebrow mb-4">Events & Platform</p>
             <h2 className="heading-section">
               The <span className="gradient-gold-text">World's Stage</span>,
               <br />Under One Roof.
             </h2>
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.1}>
+          <div className="mb-12">
+            <PremiumVisual
+              icon={Music}
+              label="LIVE EVENTS"
+              sublabel="40M annual witnesses"
+              gradient="linear-gradient(135deg,#080808 0%,#0A0A1A 100%)"
+              height="280px"
+            />
           </div>
         </Reveal>
 

@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight, Zap, Fish, Palette, Wand2, Flag } from "lucide-react";
+import { ChevronLeft, ChevronRight, Zap, Fish, Palette, Sparkles, Flag } from "lucide-react";
 import { Reveal } from "./Reveal";
-import { ImagePlaceholder } from "./ImagePlaceholder";
+import { PremiumVisual } from "./PremiumVisual";
 
 const attractions = [
-  { icon: Zap, name: "Nickelodeon Universe®", desc: "7 acres · 28 rides · 200M+ ride experiences", gradient: "linear-gradient(135deg,#080818 0%,#0A001A 100%)", label: "NICKELODEON UNIVERSE" },
-  { icon: Fish, name: "SEA LIFE Aquarium", desc: "1.3M gallons · 10,000+ sea creatures", gradient: "linear-gradient(135deg,#000A18 0%,#001A2A 100%)", label: "SEA LIFE AQUARIUM" },
-  { icon: Palette, name: "Crayola Experience", desc: "25 hands-on attractions · All ages", gradient: "linear-gradient(135deg,#180000 0%,#2A0A0A 100%)", label: "CRAYOLA EXPERIENCE" },
-  { icon: Wand2, name: "Mirror Maze", desc: "Immersive labyrinth experience", gradient: "linear-gradient(135deg,#001818 0%,#002A2A 100%)", label: "MIRROR MAZE" },
-  { icon: Flag, name: "Mini Golf", desc: "18-hole indoor course · Family favorite", gradient: "linear-gradient(135deg,#001A0A 0%,#002A18 100%)", label: "MINI GOLF" },
+  { icon: Zap, name: "Nickelodeon Universe®", desc: "7 acres · 28 rides · 200M+ ride experiences", gradient: "linear-gradient(135deg,#080818 0%,#1A0A2A 100%)", label: "NICKELODEON UNIVERSE", sublabel: "7 acres · 28 rides" },
+  { icon: Fish, name: "SEA LIFE Aquarium", desc: "1.3M gallons · 10,000+ sea creatures", gradient: "linear-gradient(135deg,#000A18 0%,#001A2A 100%)", label: "SEA LIFE AQUARIUM", sublabel: "1.3M gallons · 10,000 sea creatures" },
+  { icon: Palette, name: "Crayola Experience", desc: "25 hands-on attractions · All ages", gradient: "linear-gradient(135deg,#180808 0%,#2A0A0A 100%)", label: "CRAYOLA EXPERIENCE", sublabel: "25 hands-on attractions" },
+  { icon: Sparkles, name: "Mirror Maze", desc: "Immersive labyrinth experience", gradient: "linear-gradient(135deg,#08180A 0%,#0A2A0A 100%)", label: "MIRROR MAZE", sublabel: "Immersive labyrinth" },
+  { icon: Flag, name: "Mini Golf", desc: "18-hole indoor course · Family favorite", gradient: "linear-gradient(135deg,#001A0A 0%,#002A18 100%)", label: "MINI GOLF", sublabel: "18-hole indoor course" },
 ];
 
 export const Attractions = () => {
@@ -87,7 +87,7 @@ export const Attractions = () => {
                     border: "1px solid rgba(201,168,76,0.2)",
                   }}
                 >
-                  <ImagePlaceholder icon={a.icon} label={a.label} gradient={a.gradient} height="100%" />
+                  <PremiumVisual icon={a.icon} label={a.label} sublabel={a.sublabel} gradient={a.gradient} height="100%" />
                   <div className="absolute inset-x-0 bottom-0 p-6" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.95), transparent)" }}>
                     <h3 className="font-display text-xl text-foreground mb-1">{a.name}</h3>
                     <p className="text-xs" style={{ color: "#A0A0A0" }}>{a.desc}</p>

@@ -1,6 +1,6 @@
 import { Reveal } from "./Reveal";
 import { Gem, Plane, Crown } from "lucide-react";
-import { ImagePlaceholder } from "./ImagePlaceholder";
+import { PremiumVisual } from "./PremiumVisual";
 
 const cards = [
   { icon: Gem, title: "Premium Footfall", desc: "Curated visitor base with elevated purchase intent and brand affinity." },
@@ -36,10 +36,11 @@ export const Luxury = () => {
         </Reveal>
 
         <div className="mt-12">
-          <ImagePlaceholder
+          <PremiumVisual
             icon={Crown}
             label="LUXURY WING"
-            gradient="linear-gradient(135deg,#0A0A0A 0%,#1A0A2A 100%)"
+            sublabel="Premium corridor · High-intent visitors"
+            gradient="linear-gradient(135deg,#0A0A0A 0%,#1A0A2A 40%,#2A1020 100%)"
             height="320px"
           />
         </div>

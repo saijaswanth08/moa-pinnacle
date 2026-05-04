@@ -8,7 +8,7 @@ const stats = [
   { value: 5.6, suffix: "M sq ft", decimals: 1, label: "Total Area" },
   { value: 520, suffix: "+", label: "Stores & Brands" },
   { value: 2, prefix: "$", suffix: "B+", label: "Annual Economic Impact" },
-  { value: 4, prefix: "#", label: "Most Visited US Attraction" },
+  { value: 4, prefix: "#", label: "Most Visited US Attraction", staticValue: true },
   { value: 11000, suffix: "+", label: "Employees" },
 ];
 
@@ -42,7 +42,7 @@ export const ByTheNumbers = () => {
             <Reveal key={i} delay={i * 0.08}>
               <div className="bg-background p-10 md:p-12 h-full group hover:bg-surface transition-colors duration-500 relative" style={{ borderTop: "2px solid #C9A84C" }}>
                 <div className="font-display text-5xl md:text-6xl font-bold gradient-gold-text">
-                  <CountUp to={s.value} prefix={s.prefix} suffix={s.suffix} decimals={s.decimals} />
+                  <CountUp to={s.value} prefix={s.prefix} suffix={s.suffix} decimals={s.decimals} staticValue={s.staticValue} />
                 </div>
                 <div className="mt-4 text-sm uppercase tracking-[0.2em] text-foreground/70">{s.label}</div>
               </div>
