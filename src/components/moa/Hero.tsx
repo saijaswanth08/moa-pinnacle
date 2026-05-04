@@ -15,18 +15,19 @@ export const Hero = () => {
       {/* Video background */}
       {!iframeFailed && (
         <iframe
-          src="https://www.youtube.com/embed/6xKB6FRBH_M?autoplay=1&mute=1&loop=1&playlist=6xKB6FRBH_M&controls=0&showinfo=0&modestbranding=1&rel=0"
+          src="https://www.youtube.com/embed/ZSM3w1v-A_Y?autoplay=1&mute=1&loop=1&playlist=ZSM3w1v-A_Y&controls=0&showinfo=0&rel=0&playsinline=1"
           onLoad={() => setIframeLoaded(true)}
           onError={() => setIframeFailed(true)}
           allow="autoplay; encrypted-media"
+          allowFullScreen={false}
           title="MOA Background"
           style={{
             position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%,-50%) scale(1.4)",
+            top: 0,
+            left: 0,
             width: "100%",
             height: "100%",
+            transform: "scale(1.1)",
             border: "none",
             pointerEvents: "none",
             zIndex: 0,
@@ -34,12 +35,18 @@ export const Hero = () => {
         />
       )}
 
-      {/* Fallback / always-present radial glow */}
+      {/* Fallback */}
       {(iframeFailed || !iframeLoaded) && (
-        <>
-          <div className="absolute inset-0 bg-background" style={{ zIndex: 0 }} />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(43_53%_30%/0.4),transparent_60%)]" style={{ zIndex: 0 }} />
-        </>
+        <div className="absolute inset-0 bg-black hero-pulse" style={{ zIndex: 0 }}>
+          <div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
+            style={{
+              width: 600,
+              height: 600,
+              background: "radial-gradient(circle, rgba(201,168,76,0.08), transparent 70%)",
+            }}
+          />
+        </div>
       )}
 
       {/* Dark overlay */}
