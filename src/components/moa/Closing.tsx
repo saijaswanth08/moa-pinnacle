@@ -137,15 +137,6 @@ export const Closing = () => {
                   <Field label="Message (optional)" error={errors.message}>
                     <textarea value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} rows={4} maxLength={1000} className={`input-moa ${errors.message ? "input-error" : ""} resize-none`} />
                   </Field>
-                  <Field label="I'm interested in" error={errors.interest}>
-                    <select value={form.interest} onChange={(e) => setForm({ ...form, interest: e.target.value })} className={`input-moa ${errors.interest ? "input-error" : ""}`}>
-                      <option value="" disabled>Select your interest</option>
-                      {interestOptions.map((o) => <option key={o} value={o}>{o}</option>)}
-                    </select>
-                  </Field>
-                  <Field label="Message (optional)" error={errors.message}>
-                    <textarea value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} rows={4} maxLength={1000} className={`input-moa ${errors.message ? "input-error" : ""} resize-none`} />
-                  </Field>
                   <div className="pt-2">
                     <button
                       type="submit"
@@ -169,18 +160,26 @@ export const Closing = () => {
       <style>{`
         .input-moa {
           width: 100%;
-          background: #0A0A0A;
+          background: #111111;
           border: 1px solid rgba(201,168,76,0.2);
           color: #FFFFFF;
-          padding: 0.875rem 1rem;
+          padding: 12px 16px;
           font-size: 0.95rem;
-          border-radius: 6px;
+          font-family: 'Inter', sans-serif;
+          border-radius: 8px;
           transition: border-color 0.3s, box-shadow 0.3s;
           outline: none;
         }
         .input-moa:focus {
           border-color: #C9A84C;
           box-shadow: 0 0 0 3px rgba(201,168,76,0.15);
+        }
+        .input-moa.input-error {
+          border-color: #E24B4A;
+        }
+        .input-moa option {
+          background: #111111;
+          color: #FFFFFF;
         }
       `}</style>
     </section>
@@ -191,6 +190,6 @@ const Field = ({ label, error, children }: { label: string; error?: string; chil
   <label className="block">
     <span className="block text-xs uppercase tracking-[0.2em] text-foreground/70 mb-2">{label}</span>
     {children}
-    {error && <span className="block mt-1 text-xs" style={{ color: "#ef4444" }}>{error}</span>}
+    {error && <span className="block mt-1" style={{ color: "#E24B4A", fontSize: "12px" }}>{error}</span>}
   </label>
 );
