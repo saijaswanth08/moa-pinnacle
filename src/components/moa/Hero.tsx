@@ -1,22 +1,96 @@
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+declare global {
+  interface Window {
+    YT: any;
+    onYouTubeIframeAPIReady?: () => void;
+  }
+}
 
 export const Hero = () => {
-  const [iframeLoaded, setIframeLoaded] = useState(false);
   const [iframeFailed, setIframeFailed] = useState(false);
+  const playerRef = useRef<any>(null);
+  const readyRef = useRef(false);
   const go = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const init = () => {
+      if (cancelled || !window.YT?.Player) return;
+      try {
+        playerRef.current = new window.YT.Player("hero-video-iframe", {
+          events: {
+            onReady: () => {
+              readyRef.current = true;
+            },
+            onStateChange: (event: any) => {
+              if (event.data === window.YT.PlayerState.ENDED) {
+                playerRef.current?.seekTo(0, true);
+                playerRef.current?.playVideo();
+              }
+            },
+            onError: () => setIframeFailed(true),
+          },
+        });
+      } catch {
+        setIframeFailed(true);
+      }
+    };
+
+    if (window.YT && window.YT.Player) {
+      init();
+    } else {
+      const existing = document.querySelector<HTMLScriptElement>('script[src="https://www.youtube.com/iframe_api"]');
+      if (!existing) {
+        const tag = document.createElement("script");
+        tag.src = "https://www.youtube.com/iframe_api";
+        document.body.appendChild(tag);
+      }
+      const prev = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = () => {
+        prev?.();
+        init();
+      };
+    }
+
+    const fallbackTimer = window.setTimeout(() => {
+      if (!cancelled && !readyRef.current) setIframeFailed(true);
+    }, 6000);
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(fallbackTimer);
+      try {
+        playerRef.current?.destroy?.();
+      } catch {}
+    };
+  }, []);
 
   return (
     <section
       id="overview"
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
     >
+      {/* Fallback (always rendered behind iframe; covered when video loads) */}
+      <div className="absolute inset-0 bg-black hero-pulse" style={{ zIndex: 0 }}>
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
+          style={{
+            width: 600,
+            height: 600,
+            background: "radial-gradient(circle, rgba(201,168,76,0.08), transparent 70%)",
+          }}
+        />
+      </div>
+
       {/* Video background */}
       {!iframeFailed && (
         <iframe
-          src="https://www.youtube.com/embed/ZSM3w1v-A_Y?autoplay=1&mute=1&loop=1&playlist=ZSM3w1v-A_Y&controls=0&showinfo=0&rel=0&playsinline=1"
-          onLoad={() => setIframeLoaded(true)}
+          id="hero-video-iframe"
+          src="https://www.youtube.com/embed/JLKbW1aSDK8?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=JLKbW1aSDK8&controls=0&showinfo=0&rel=0&playsinline=1&start=0&end=54"
           onError={() => setIframeFailed(true)}
           allow="autoplay; encrypted-media"
           allowFullScreen={false}
@@ -35,22 +109,8 @@ export const Hero = () => {
         />
       )}
 
-      {/* Fallback */}
-      {(iframeFailed || !iframeLoaded) && (
-        <div className="absolute inset-0 bg-black hero-pulse" style={{ zIndex: 0 }}>
-          <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
-            style={{
-              width: 600,
-              height: 600,
-              background: "radial-gradient(circle, rgba(201,168,76,0.08), transparent 70%)",
-            }}
-          />
-        </div>
-      )}
-
       {/* Dark overlay */}
-      <div className="absolute inset-0" style={{ background: "rgba(0,0,0,0.65)", zIndex: 1 }} />
+      <div className="absolute inset-0" style={{ background: "rgba(0,0,0,0.55)", zIndex: 1 }} />
 
       {/* Content */}
       <div className="container-deck relative text-center pt-24" style={{ zIndex: 2 }}>
