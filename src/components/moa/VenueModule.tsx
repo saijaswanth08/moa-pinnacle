@@ -32,13 +32,12 @@ export const VenueModule = () => {
         </Reveal>
 
         <Reveal delay={0.05}>
-          <div className="mb-12">
-            <PremiumVisual
-              icon={Building2}
-              label="VENUE SPACES"
-              sublabel="World-class infrastructure"
-              gradient="linear-gradient(135deg,#0A0A0A 0%,#111100 100%)"
-              height="220px"
+          <div className="mb-12" style={{ height: "220px" }}>
+            <img
+              src="/venue.jpg.jpeg"
+              alt="Venue at MOA"
+              className="w-full h-full object-cover rounded-xl"
+              style={{ border: "1px solid rgba(201,168,76,0.2)" }}
             />
           </div>
         </Reveal>
