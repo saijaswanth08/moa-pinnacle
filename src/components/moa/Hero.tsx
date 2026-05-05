@@ -27,8 +27,8 @@ export const Hero = () => {
               readyRef.current = true;
             },
             onStateChange: (event: any) => {
-              if (event.data === window.YT.PlayerState.ENDED) {
-                playerRef.current?.seekTo(0, true);
+              if (event.data === 0) {
+                playerRef.current?.seekTo(5, true);
                 playerRef.current?.playVideo();
               }
             },
