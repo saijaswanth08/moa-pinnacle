@@ -88,12 +88,10 @@ export const Attractions = () => {
                   }}
                 >
                   {a.name === "SEA LIFE Aquarium" ? (
-                    <img
-                      src="/aquarim.jpg.jpeg"
-                      alt="SEA LIFE Aquarium"
-                      className="w-full h-full object-cover rounded-xl"
-                      style={{ border: "1px solid rgba(201,168,76,0.2)" }}
-                    />
+                    <div style={{height:"100%",borderRadius:"12px",background:"linear-gradient(135deg,#000A18,#001A2A)",border:"1px solid rgba(201,168,76,0.2)",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:"12px"}}>
+                      <Fish size={48} color="#C9A84C" />
+                      <p style={{color:"#C9A84C",fontSize:"11px",letterSpacing:"4px"}}>SEA LIFE AQUARIUM</p>
+                    </div>
                   ) : (
                     <PremiumVisual icon={a.icon} label={a.label} sublabel={a.sublabel} gradient={a.gradient} height="100%" />
                   )}
