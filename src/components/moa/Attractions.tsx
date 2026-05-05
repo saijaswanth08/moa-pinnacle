@@ -87,7 +87,16 @@ export const Attractions = () => {
                     border: "1px solid rgba(201,168,76,0.2)",
                   }}
                 >
-                  <PremiumVisual icon={a.icon} label={a.label} sublabel={a.sublabel} gradient={a.gradient} height="100%" />
+                  {a.name === "SEA LIFE Aquarium" ? (
+                    <img
+                      src="/aquarim.jpg.jpeg"
+                      alt="SEA LIFE Aquarium"
+                      className="w-full h-full object-cover rounded-xl"
+                      style={{ border: "1px solid rgba(201,168,76,0.2)" }}
+                    />
+                  ) : (
+                    <PremiumVisual icon={a.icon} label={a.label} sublabel={a.sublabel} gradient={a.gradient} height="100%" />
+                  )}
                   <div className="absolute inset-x-0 bottom-0 p-6" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.95), transparent)" }}>
                     <h3 className="font-display text-xl text-foreground mb-1">{a.name}</h3>
                     <p className="text-xs" style={{ color: "#A0A0A0" }}>{a.desc}</p>
