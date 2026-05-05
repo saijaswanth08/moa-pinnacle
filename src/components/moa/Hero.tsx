@@ -199,7 +199,7 @@ export const Hero = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.6, duration: 1 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 text-foreground/70 hover:text-gold transition-colors"
-        style={{ zIndex: 2 }}
+        style={{ zIndex: 4 }}
         aria-label="Scroll down"
       >
         <ChevronDown size={32} className="animate-bounce" />
