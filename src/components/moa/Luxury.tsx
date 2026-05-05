@@ -35,13 +35,12 @@ export const Luxury = () => {
           </p>
         </Reveal>
 
-        <div className="mt-12">
-          <PremiumVisual
-            icon={Crown}
-            label="LUXURY WING"
-            sublabel="Premium corridor · High-intent visitors"
-            gradient="linear-gradient(135deg,#0A0A0A 0%,#1A0A2A 40%,#2A1020 100%)"
-            height="320px"
+        <div className="mt-12" style={{ height: "320px" }}>
+          <img
+            src="/luxury.jpg.webp"
+            alt="Luxury Wing MOA"
+            className="w-full h-full object-cover rounded-xl"
+            style={{ border: "1px solid rgba(201,168,76,0.2)" }}
           />
         </div>
 
