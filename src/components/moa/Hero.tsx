@@ -110,11 +110,14 @@ export const Hero = () => {
         </div>
       )}
 
+      {/* Click blocker over iframe */}
+      <div style={{ position: "absolute", inset: 0, zIndex: 2, background: "transparent", pointerEvents: "all", cursor: "default" }} />
+
       {/* Dark overlay */}
-      <div className="absolute inset-0" style={{ background: "rgba(0,0,0,0.55)", zIndex: 1 }} />
+      <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.60)", zIndex: 3 }} />
 
       {/* Content */}
-      <div className="container-deck relative text-center pt-24" style={{ zIndex: 2 }}>
+      <div className="container-deck relative text-center pt-24" style={{ zIndex: 4 }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
