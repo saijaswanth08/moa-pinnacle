@@ -32,13 +32,9 @@ export const VenueModule = () => {
         </Reveal>
 
         <Reveal delay={0.05}>
-          <div className="mb-12" style={{ height: "220px" }}>
-            <img
-              src="/venue.jpg.jpeg"
-              alt="Venue at MOA"
-              className="w-full h-full object-cover rounded-xl"
-              style={{ border: "1px solid rgba(201,168,76,0.2)" }}
-            />
+          <div className="mb-12" style={{height:"420px",borderRadius:"12px",background:"linear-gradient(135deg,#0A0A0A,#111100)",border:"1px solid rgba(201,168,76,0.2)",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:"12px"}}>
+            <Building2 size={48} color="#C9A84C" />
+            <p style={{color:"#C9A84C",fontSize:"11px",letterSpacing:"4px"}}>VENUE SPACES</p>
           </div>
         </Reveal>
 

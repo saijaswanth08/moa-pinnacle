@@ -27,8 +27,8 @@ export const Hero = () => {
               readyRef.current = true;
             },
             onStateChange: (event: any) => {
-              if (event.data === window.YT.PlayerState.ENDED) {
-                playerRef.current?.seekTo(0, true);
+              if (event.data === 0) {
+                playerRef.current?.seekTo(5, true);
                 playerRef.current?.playVideo();
               }
             },
@@ -91,7 +91,7 @@ export const Hero = () => {
         <div style={{ pointerEvents: "none", position: "absolute", inset: 0, overflow: "hidden", zIndex: 0 }}>
           <iframe
             id="hero-video-iframe"
-            src="https://www.youtube.com/embed/JLKbW1aSDK8?enablejsapi=1&autoplay=1&mute=1&controls=0&disablekb=1&modestbranding=1&showinfo=0&rel=0&playsinline=1&iv_load_policy=3&start=0&end=54&loop=1&playlist=JLKbW1aSDK8"
+            src="https://www.youtube.com/embed/ioHfrWD1AFU?enablejsapi=1&autoplay=1&mute=1&controls=0&disablekb=1&modestbranding=1&showinfo=0&rel=0&playsinline=1&iv_load_policy=3&start=5&end=120&loop=1&playlist=ioHfrWD1AFU"
             onError={() => setIframeFailed(true)}
             allow="autoplay; encrypted-media"
             allowFullScreen={false}
@@ -110,11 +110,14 @@ export const Hero = () => {
         </div>
       )}
 
+      {/* Click blocker over iframe */}
+      <div style={{ position: "absolute", inset: 0, zIndex: 2, background: "transparent", pointerEvents: "all", cursor: "default" }} />
+
       {/* Dark overlay */}
-      <div className="absolute inset-0" style={{ background: "rgba(0,0,0,0.55)", zIndex: 1 }} />
+      <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.60)", zIndex: 3 }} />
 
       {/* Content */}
-      <div className="container-deck relative text-center pt-24" style={{ zIndex: 2 }}>
+      <div className="container-deck relative text-center pt-24" style={{ zIndex: 4 }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -196,7 +199,7 @@ export const Hero = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.6, duration: 1 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 text-foreground/70 hover:text-gold transition-colors"
-        style={{ zIndex: 2 }}
+        style={{ zIndex: 4 }}
         aria-label="Scroll down"
       >
         <ChevronDown size={32} className="animate-bounce" />

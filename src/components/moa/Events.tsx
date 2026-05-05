@@ -65,13 +65,9 @@ export const Events = () => {
         </Reveal>
 
         <Reveal delay={0.1}>
-          <div className="mb-12" style={{ height: "280px" }}>
-            <img
-              src="/events.jpg.jpeg"
-              alt="Live Events at MOA"
-              className="w-full h-full object-cover rounded-xl"
-              style={{ border: "1px solid rgba(201,168,76,0.2)" }}
-            />
+          <div className="mb-12" style={{height:"420px",borderRadius:"12px",background:"linear-gradient(135deg,#080808,#0A0A1A)",border:"1px solid rgba(201,168,76,0.2)",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:"12px"}}>
+            <Music size={48} color="#C9A84C" />
+            <p style={{color:"#C9A84C",fontSize:"11px",letterSpacing:"4px"}}>LIVE EVENTS</p>
           </div>
         </Reveal>
 

@@ -35,13 +35,9 @@ export const Luxury = () => {
           </p>
         </Reveal>
 
-        <div className="mt-12" style={{ height: "320px" }}>
-          <img
-            src="/luxury.jpg.webp"
-            alt="Luxury Wing MOA"
-            className="w-full h-full object-cover rounded-xl"
-            style={{ border: "1px solid rgba(201,168,76,0.2)" }}
-          />
+        <div className="mt-12" style={{height:"420px",borderRadius:"12px",background:"linear-gradient(135deg,#0A0A0A,#1A0A2A)",border:"1px solid rgba(201,168,76,0.2)",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:"12px"}}>
+          <Crown size={48} color="#C9A84C" />
+          <p style={{color:"#C9A84C",fontSize:"11px",letterSpacing:"4px"}}>LUXURY WING</p>
         </div>
 
         <div className="mt-20 grid md:grid-cols-3 gap-8">
