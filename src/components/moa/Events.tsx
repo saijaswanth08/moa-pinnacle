@@ -65,13 +65,12 @@ export const Events = () => {
         </Reveal>
 
         <Reveal delay={0.1}>
-          <div className="mb-12">
-            <PremiumVisual
-              icon={Music}
-              label="LIVE EVENTS"
-              sublabel="40M annual witnesses"
-              gradient="linear-gradient(135deg,#080808 0%,#0A0A1A 100%)"
-              height="280px"
+          <div className="mb-12" style={{ height: "280px" }}>
+            <img
+              src="/events.jpg.jpeg"
+              alt="Live Events at MOA"
+              className="w-full h-full object-cover rounded-xl"
+              style={{ border: "1px solid rgba(201,168,76,0.2)" }}
             />
           </div>
         </Reveal>

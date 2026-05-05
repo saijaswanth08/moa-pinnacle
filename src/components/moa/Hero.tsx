@@ -88,25 +88,26 @@ export const Hero = () => {
 
       {/* Video background */}
       {!iframeFailed && (
-        <iframe
-          id="hero-video-iframe"
-          src="https://www.youtube.com/embed/JLKbW1aSDK8?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=JLKbW1aSDK8&controls=0&showinfo=0&rel=0&playsinline=1&start=0&end=54"
-          onError={() => setIframeFailed(true)}
-          allow="autoplay; encrypted-media"
-          allowFullScreen={false}
-          title="MOA Background"
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            transform: "scale(1.1)",
-            border: "none",
-            pointerEvents: "none",
-            zIndex: 0,
-          }}
-        />
+        <div style={{ pointerEvents: "none", position: "absolute", inset: 0, overflow: "hidden", zIndex: 0 }}>
+          <iframe
+            id="hero-video-iframe"
+            src="https://www.youtube.com/embed/JLKbW1aSDK8?enablejsapi=1&autoplay=1&mute=1&controls=0&disablekb=1&modestbranding=1&showinfo=0&rel=0&playsinline=1&iv_load_policy=3&start=0&end=54&loop=1&playlist=JLKbW1aSDK8"
+            onError={() => setIframeFailed(true)}
+            allow="autoplay; encrypted-media"
+            allowFullScreen={false}
+            title="MOA Background"
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              transform: "scale(1.1)",
+              border: "none",
+              pointerEvents: "none",
+            }}
+          />
+        </div>
       )}
 
       {/* Dark overlay */}
