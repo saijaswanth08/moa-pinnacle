@@ -6,7 +6,7 @@ A cinematic, browser-based interactive sales deck for Mall of America, built as 
 
 ## Live Demo
 
-[Insert Vercel URL here]
+[https://moa-pinnacle-jva359a1y-saijashuunallamaru-3760s-projects.vercel.app](https://moa-pinnacle-jva359a1y-saijashuunallamaru-3760s-projects.vercel.app)
 
 ## Tech Stack
 
