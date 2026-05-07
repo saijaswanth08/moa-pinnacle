@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 import { Reveal } from "./Reveal";
-import { ArrowRight, Download, Building2 } from "lucide-react";
-import { PremiumVisual } from "./PremiumVisual";
+import { ArrowRight, Download } from "lucide-react";
+import { CinematicVisual } from "./CinematicVisual";
 
 const venueCards = [
-  { name: "Main Event Stage", desc: "Capacity 5,000 standing / 2,500 seated · Full AV rig · Broadcast-ready" },
+  { name: "Main Event Stage", desc: "Capacity 5,000 standing / 2,500 seated · Full AV rig · Broadcast-ready", img: "/images/venue-stage.png" },
   { name: "Rotunda Plaza", desc: "360° branded environment · 20,000 sq ft · Premium sightlines" },
   { name: "Outdoor East Plaza", desc: "Open-air events · Seasonal activations · 15,000 person capacity" },
   { name: "Private Event Suites", desc: "Corporate meetings · VIP experiences · Fully catered" },
@@ -32,10 +32,16 @@ export const VenueModule = () => {
         </Reveal>
 
         <Reveal delay={0.05}>
-          <div className="mb-12" style={{height:"420px",borderRadius:"12px",background:"linear-gradient(135deg,#0A0A0A,#111100)",border:"1px solid rgba(201,168,76,0.2)",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:"12px"}}>
-            <Building2 size={48} color="#C9A84C" />
-            <p style={{color:"#C9A84C",fontSize:"11px",letterSpacing:"4px"}}>VENUE SPACES</p>
-          </div>
+          <CinematicVisual
+            src="/images/venue-expo.png"
+            alt="Exposition and convention center at Mall of America"
+            label="VENUE SPACES"
+            sublabel="4 venues · 73,000+ combined sq ft"
+            height="420px"
+            overlayOpacity={0.4}
+            glowColor="rgba(201,168,76,0.12)"
+            className="mb-12"
+          />
         </Reveal>
 
         <div className="grid lg:grid-cols-2 gap-10">
@@ -47,14 +53,22 @@ export const VenueModule = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.6, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                className="group relative overflow-hidden"
                 style={{
                   background: "#111111",
                   borderLeft: "1px solid #C9A84C",
-                  padding: "16px",
+                  borderRadius: "0 8px 8px 0",
                 }}
               >
-                <h3 className="font-display text-xl text-foreground mb-2">{v.name}</h3>
-                <p className="text-sm" style={{ color: "#A0A0A0" }}>{v.desc}</p>
+                {v.img && (
+                  <div className="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity duration-700">
+                    <img src={v.img} alt={v.name} className="w-full h-full object-cover" loading="lazy" />
+                  </div>
+                )}
+                <div className="relative p-5">
+                  <h3 className="font-display text-xl text-foreground mb-2">{v.name}</h3>
+                  <p className="text-sm" style={{ color: "#A0A0A0" }}>{v.desc}</p>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -86,16 +100,75 @@ export const VenueModule = () => {
           </Reveal>
         </div>
 
+        {/* Video Panel */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          style={{
+            position: "relative",
+            borderRadius: "16px",
+            overflow: "hidden",
+            border: "1px solid rgba(201,168,76,0.3)",
+            marginTop: "48px",
+            maxWidth: "900px",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+          whileHover={{ scale: 1.01 }}
+        >
+          <div style={{
+            position: "absolute", inset: 0,
+            background: "linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.8) 100%)",
+            zIndex: 2, pointerEvents: "none"
+          }} />
+          <div style={{
+            position: "absolute", bottom: "24px", left: "24px",
+            zIndex: 3, color: "white"
+          }}>
+            <p style={{ color: "#C9A84C", fontSize: "11px", letterSpacing: "3px", fontFamily: "Inter" }}>
+              VENUE SHOWCASE
+            </p>
+            <p style={{ fontSize: "20px", fontFamily: "Playfair Display", fontWeight: "500" }}>
+              See the Space. Feel the Scale.
+            </p>
+          </div>
+          <div style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}>
+            <iframe
+              src="https://www.youtube.com/embed/JLKbW1aSDK8?mute=1&controls=1&rel=0&modestbranding=1&playsinline=1"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              title="Mall of America Venue Showcase"
+              style={{
+                position: "absolute", top: 0, left: 0,
+                width: "100%", height: "100%",
+                border: "none"
+              }}
+            />
+          </div>
+        </motion.div>
+
         <Reveal delay={0.3}>
           <div className="mt-14 flex flex-col sm:flex-row gap-4 justify-center">
             <button
+              onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
               className="inline-flex items-center justify-center gap-2 px-8 py-4 font-medium tracking-wide glow-gold-hover hover:bg-gold-bright"
               style={{ background: "#C9A84C", color: "#000" }}
             >
               Book Your Venue
               <ArrowRight size={18} />
             </button>
-            <button className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-foreground/60 text-foreground hover:border-gold hover:text-gold transition-colors font-medium tracking-wide">
+            <button 
+              onClick={() => {
+                import("sonner").then(({ toast }) => {
+                  toast.success("Downloading Venue Kit...", {
+                    description: "Your PDF is being generated and will download shortly."
+                  });
+                });
+              }}
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-foreground/60 text-foreground hover:border-gold hover:text-gold transition-colors font-medium tracking-wide"
+            >
               <Download size={18} />
               Download Venue Kit
             </button>

@@ -70,13 +70,33 @@ export const Closing = () => {
           </Reveal>
           <Reveal delay={0.2}>
             <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="px-8 py-4 font-medium tracking-wide glow-gold-hover hover:bg-gold-bright" style={{ background: "#C9A84C", color: "#000" }}>
+              <button 
+                onClick={() => {
+                  document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth" });
+                  setForm(prev => ({ ...prev, interest: "Retail Leasing" }));
+                }}
+                className="px-8 py-4 font-medium tracking-wide glow-gold-hover hover:bg-gold-bright" 
+                style={{ background: "#C9A84C", color: "#000" }}
+              >
                 Lease a Space
               </button>
-              <button className="px-8 py-4 border border-foreground text-foreground hover:border-gold hover:text-gold transition-all font-medium tracking-wide">
+              <button 
+                onClick={() => {
+                  document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth" });
+                  setForm(prev => ({ ...prev, interest: "Sponsorship" }));
+                }}
+                className="px-8 py-4 border border-foreground text-foreground hover:border-gold hover:text-gold transition-all font-medium tracking-wide"
+              >
                 Become a Sponsor
               </button>
-              <button className="px-8 py-4 border transition-all font-medium tracking-wide hover:bg-gold/10" style={{ borderColor: "#C9A84C", color: "#C9A84C" }}>
+              <button 
+                onClick={() => {
+                  document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth" });
+                  setForm(prev => ({ ...prev, interest: "Event Booking" }));
+                }}
+                className="px-8 py-4 border transition-all font-medium tracking-wide hover:bg-gold/10" 
+                style={{ borderColor: "#C9A84C", color: "#C9A84C" }}
+              >
                 Book an Event
               </button>
             </div>
@@ -84,7 +104,7 @@ export const Closing = () => {
         </div>
       </div>
 
-      <div className="relative section-pad" style={{ background: "rgba(20,20,20,0.4)", borderTop: "1px solid rgba(201,168,76,0.15)" }}>
+      <div id="contact-form" className="relative section-pad" style={{ background: "rgba(20,20,20,0.4)", borderTop: "1px solid rgba(201,168,76,0.15)" }}>
         <div className="container-deck max-w-3xl">
           <Reveal>
             <div className="text-center mb-12">

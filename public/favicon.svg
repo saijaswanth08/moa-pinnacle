@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F2D388" />
+      <stop offset="50%" stop-color="#C9A84C" />
+      <stop offset="100%" stop-color="#967425" />
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#C9A84C" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#050505" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Deep black background with soft rounded corners -->
+  <rect width="512" height="512" fill="#050505" rx="110"/>
+  <!-- Subtle gold glow behind the text -->
+  <circle cx="256" cy="256" r="200" fill="url(#glow)"/>
+  <!-- Luxury Star / Diamond Motif -->
+  <path d="M256 100 L272 140 L312 156 L272 172 L256 212 L240 172 L200 156 L240 140 Z" fill="url(#gold)" />
+  <!-- Elegant 'M' for Mall of America -->
+  <text x="256" y="410" font-family="Georgia, 'Times New Roman', serif" font-size="260" font-weight="bold" fill="url(#gold)" text-anchor="middle">M</text>
+</svg>

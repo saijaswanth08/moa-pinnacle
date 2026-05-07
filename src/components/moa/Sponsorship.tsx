@@ -1,5 +1,6 @@
 import { Reveal } from "./Reveal";
 import { ArrowRight, Check } from "lucide-react";
+import { toast } from "sonner";
 
 const tiers = [
   {
@@ -87,7 +88,10 @@ export const Sponsorship = () => {
 
         <Reveal delay={0.4}>
           <div className="mt-12 text-center">
-            <button className="group inline-flex items-center gap-2 px-8 py-4 bg-gold text-primary-foreground font-medium tracking-wide glow-gold-hover hover:bg-gold-bright">
+            <button 
+              onClick={() => toast.success("Partnership Request Initiated", { description: "This would open the partnership request modal in the full app." })}
+              className="group inline-flex items-center gap-2 px-8 py-4 bg-gold text-primary-foreground font-medium tracking-wide glow-gold-hover hover:bg-gold-bright"
+            >
               Request Partnership Deck
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </button>

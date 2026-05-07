@@ -28,21 +28,30 @@ export const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting && e.intersectionRatio >= 0.4) {
-            setActive(e.target.id);
+    const handleScrollSpy = () => {
+      const viewportCenter = window.innerHeight * 0.4; // 40% from top
+      let current = "overview"; // Default fallback
+      for (const link of links) {
+        const el = document.getElementById(link.id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= viewportCenter && rect.bottom >= viewportCenter) {
+            current = link.id;
+            break; // Found the active section
           }
-        });
-      },
-      { threshold: [0.4] }
-    );
-    links.forEach((l) => {
-      const el = document.getElementById(l.id);
-      if (el) observer.observe(el);
-    });
-    return () => observer.disconnect();
+        }
+      }
+      setActive(current);
+    };
+
+    // Run on mount and scroll, interval handles lazy loaded components
+    const interval = setInterval(handleScrollSpy, 200);
+    window.addEventListener("scroll", handleScrollSpy, { passive: true });
+    
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener("scroll", handleScrollSpy);
+    };
   }, []);
 
   const go = (id: string) => {

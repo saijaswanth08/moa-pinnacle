@@ -2,7 +2,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Reveal } from "./Reveal";
 import { ArrowRight, Music, Megaphone, Building2, Plus } from "lucide-react";
-import { PremiumVisual } from "./PremiumVisual";
+import { CinematicVisual } from "./CinematicVisual";
+import { toast } from "sonner";
 
 const cards = [
   {
@@ -65,10 +66,16 @@ export const Events = () => {
         </Reveal>
 
         <Reveal delay={0.1}>
-          <div className="mb-12" style={{height:"420px",borderRadius:"12px",background:"linear-gradient(135deg,#080808,#0A0A1A)",border:"1px solid rgba(201,168,76,0.2)",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:"12px"}}>
-            <Music size={48} color="#C9A84C" />
-            <p style={{color:"#C9A84C",fontSize:"11px",letterSpacing:"4px"}}>LIVE EVENTS</p>
-          </div>
+          <CinematicVisual
+            src="/images/events-concert.png"
+            alt="Live concert event at Mall of America rotunda"
+            label="LIVE EVENTS"
+            sublabel="7,000+ capacity · World-class production"
+            height="420px"
+            overlayOpacity={0.35}
+            glowColor="rgba(120,80,200,0.15)"
+            className="mb-12"
+          />
         </Reveal>
 
         <div className="space-y-4">
@@ -116,7 +123,10 @@ export const Events = () => {
                               </li>
                             ))}
                           </ul>
-                          <button className="group inline-flex items-center gap-2 text-gold font-medium tracking-wide hover:gap-4 transition-all">
+                          <button 
+                            onClick={() => toast.success("Event Flow Initiated", { description: `This would open the booking flow for: ${c.title}` })}
+                            className="group inline-flex items-center gap-2 text-gold font-medium tracking-wide hover:gap-4 transition-all"
+                          >
                             {c.cta}
                             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                           </button>
@@ -129,6 +139,55 @@ export const Events = () => {
             );
           })}
         </div>
+
+        {/* Video Panel */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          style={{
+            position: "relative",
+            borderRadius: "16px",
+            overflow: "hidden",
+            border: "1px solid rgba(201,168,76,0.3)",
+            marginTop: "48px",
+            maxWidth: "900px",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+          whileHover={{ scale: 1.01 }}
+        >
+          <div style={{
+            position: "absolute", inset: 0,
+            background: "linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.8) 100%)",
+            zIndex: 2, pointerEvents: "none"
+          }} />
+          <div style={{
+            position: "absolute", bottom: "24px", left: "24px",
+            zIndex: 3, color: "white"
+          }}>
+            <p style={{ color: "#C9A84C", fontSize: "11px", letterSpacing: "3px", fontFamily: "Inter" }}>
+              LIVE AT MOA
+            </p>
+            <p style={{ fontSize: "20px", fontFamily: "Playfair Display", fontWeight: "500" }}>
+              World-Class Events Platform
+            </p>
+          </div>
+          <div style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}>
+            <iframe
+              src="https://www.youtube.com/embed/ioHfrWD1AFU?mute=1&controls=1&rel=0&modestbranding=1&playsinline=1"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              title="Mall of America Events"
+              style={{
+                position: "absolute", top: 0, left: 0,
+                width: "100%", height: "100%",
+                border: "none"
+              }}
+            />
+          </div>
+        </motion.div>
       </div>
     </section>
   );

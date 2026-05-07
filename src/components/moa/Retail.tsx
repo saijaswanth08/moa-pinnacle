@@ -1,6 +1,6 @@
-import { ArrowRight, Store, Sparkles, Layers, ShoppingBag } from "lucide-react";
+import { ArrowRight, Store, Sparkles, Layers } from "lucide-react";
 import { Reveal } from "./Reveal";
-import { PremiumVisual } from "./PremiumVisual";
+import { CinematicVisual } from "./CinematicVisual";
 
 const features = [
   { icon: Store, title: "Flagship Retail", desc: "Multi-level anchor presence with prime visibility." },
@@ -24,7 +24,10 @@ export const Retail = () => {
                 <span className="text-gold font-medium">52% more</span> than at any other mall nationwide.
               </p>
 
-              <button className="group mt-10 inline-flex items-center gap-2 text-gold font-medium tracking-wide hover:gap-4 transition-all">
+              <button 
+                onClick={() => document.getElementById("leasing")?.scrollIntoView({ behavior: "smooth" })}
+                className="group mt-10 inline-flex items-center gap-2 text-gold font-medium tracking-wide hover:gap-4 transition-all"
+              >
                 Explore Leasing Options
                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </button>
@@ -32,11 +35,11 @@ export const Retail = () => {
           </Reveal>
 
           <Reveal delay={0.2}>
-            <PremiumVisual
-              icon={ShoppingBag}
+            <CinematicVisual
+              src="/images/retail-corridor.png"
+              alt="Premium retail corridors at Mall of America"
               label="RETAIL FLOOR"
               sublabel="520+ stores · 4 levels"
-              gradient="linear-gradient(135deg,#0A0A0A 0%,#1A1200 40%,#2A1A00 100%)"
               height="500px"
             />
           </Reveal>

@@ -1,126 +1,64 @@
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
-
-declare global {
-  interface Window {
-    YT: any;
-    onYouTubeIframeAPIReady?: () => void;
-  }
-}
+import { useState } from "react";
 
 export const Hero = () => {
-  const [iframeFailed, setIframeFailed] = useState(false);
-  const playerRef = useRef<any>(null);
-  const readyRef = useRef(false);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const go = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-
-  useEffect(() => {
-    let cancelled = false;
-
-    const init = () => {
-      if (cancelled || !window.YT?.Player) return;
-      try {
-        playerRef.current = new window.YT.Player("hero-video-iframe", {
-          events: {
-            onReady: () => {
-              readyRef.current = true;
-            },
-            onStateChange: (event: any) => {
-              if (event.data === 0) {
-                playerRef.current?.seekTo(5, true);
-                playerRef.current?.playVideo();
-              }
-            },
-            onError: () => setIframeFailed(true),
-          },
-        });
-      } catch {
-        setIframeFailed(true);
-      }
-    };
-
-    if (window.YT && window.YT.Player) {
-      init();
-    } else {
-      const existing = document.querySelector<HTMLScriptElement>('script[src="https://www.youtube.com/iframe_api"]');
-      if (!existing) {
-        const tag = document.createElement("script");
-        tag.src = "https://www.youtube.com/iframe_api";
-        document.body.appendChild(tag);
-      }
-      const prev = window.onYouTubeIframeAPIReady;
-      window.onYouTubeIframeAPIReady = () => {
-        prev?.();
-        init();
-      };
-    }
-
-    const fallbackTimer = window.setTimeout(() => {
-      if (!cancelled && !readyRef.current) setIframeFailed(true);
-    }, 6000);
-
-    return () => {
-      cancelled = true;
-      window.clearTimeout(fallbackTimer);
-      try {
-        playerRef.current?.destroy?.();
-      } catch {}
-    };
-  }, []);
 
   return (
     <section
       id="overview"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black"
     >
-      {/* Fallback (always rendered behind iframe; covered when video loads) */}
-      <div className="absolute inset-0 bg-black hero-pulse" style={{ zIndex: 0 }}>
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
-          style={{
-            width: 600,
-            height: 600,
-            background: "radial-gradient(circle, rgba(201,168,76,0.08), transparent 70%)",
+      {/* ── CLEAN VIDEO LAYER ── */}
+      {/* 
+        This uses the local file you provide. 
+        Zero YouTube branding. Zero buttons. 100% control.
+      */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        {/* Poster Image (shown instantly) */}
+        <div 
+          className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat scale-110 transition-opacity duration-1000"
+          style={{ 
+            backgroundImage: 'url("/images/retail-corridor.png")',
+            filter: "brightness(0.7) contrast(1.1)",
+            opacity: isVideoLoaded ? 0 : 0.6
           }}
         />
+        
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          onCanPlay={() => setIsVideoLoaded(true)}
+          className={`w-full h-full object-cover scale-110 transition-opacity duration-1000 ${isVideoLoaded ? 'opacity-60' : 'opacity-0'}`}
+          style={{ filter: "brightness(0.7) contrast(1.1)" }}
+        >
+          <source src="/videos/hero-bg.webm" type="video/webm" />
+        </video>
       </div>
 
-      {/* Video background */}
-      {!iframeFailed && (
-        <div style={{ pointerEvents: "none", position: "absolute", inset: 0, overflow: "hidden", zIndex: 0 }}>
-          <iframe
-            id="hero-video-iframe"
-            src="https://www.youtube.com/embed/ioHfrWD1AFU?enablejsapi=1&autoplay=1&mute=1&controls=0&disablekb=1&modestbranding=1&showinfo=0&rel=0&playsinline=1&iv_load_policy=3&start=5&end=120&loop=1&playlist=ioHfrWD1AFU"
-            onError={() => setIframeFailed(true)}
-            allow="autoplay; encrypted-media"
-            allowFullScreen={false}
-            title="MOA Background"
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              transform: "scale(1.1)",
-              border: "none",
-              pointerEvents: "none",
-            }}
-          />
-        </div>
-      )}
+      {/* ── CINEMATIC OVERLAYS ── */}
+      <div 
+        className="absolute inset-0 z-10" 
+        style={{
+          background: "linear-gradient(180deg, rgba(0,0,0,0.4) 0%, transparent 50%, rgba(0,0,0,0.8) 100%)",
+        }}
+      />
+      
+      {/* Subtle radial glow */}
+      <div 
+        className="absolute inset-0 z-10"
+        style={{
+          background: "radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%)",
+        }}
+      />
 
-      {/* Transparent UI suppressor overlay */}
-      <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: 10, background: "transparent", pointerEvents: "none" }} />
-
-      {/* Click blocker over iframe */}
-      <div style={{ position: "absolute", inset: 0, zIndex: 2, background: "transparent", pointerEvents: "all", cursor: "default" }} />
-
-      {/* Dark overlay */}
-      <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.60)", zIndex: 3 }} />
-
-      {/* Content */}
-      <div className="container-deck relative text-center pt-24" style={{ zIndex: 4 }}>
+      {/* ── CONTENT (z-index 20) ── */}
+      <div className="container-deck relative text-center pt-24 z-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -201,8 +139,7 @@ export const Hero = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.6, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-foreground/70 hover:text-gold transition-colors"
-        style={{ zIndex: 4 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-foreground/70 hover:text-gold transition-colors z-20"
         aria-label="Scroll down"
       >
         <ChevronDown size={32} className="animate-bounce" />

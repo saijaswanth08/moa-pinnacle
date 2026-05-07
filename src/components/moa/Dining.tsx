@@ -1,6 +1,5 @@
 import { Reveal } from "./Reveal";
-import { UtensilsCrossed } from "lucide-react";
-import { PremiumVisual } from "./PremiumVisual";
+import { CinematicVisual } from "./CinematicVisual";
 
 const pills = ["Fine Dining", "Fast Casual", "Celebrity Chef Concepts"];
 
@@ -38,12 +37,14 @@ export const Dining = () => {
           </Reveal>
 
           <Reveal delay={0.2}>
-            <PremiumVisual
-              icon={UtensilsCrossed}
+            <CinematicVisual
+              src="/images/dining-experience.png"
+              alt="Premium dining experience at Mall of America"
               label="DINING EXPERIENCE"
               sublabel="50+ restaurants · 3.5hr avg dwell"
-              gradient="linear-gradient(135deg,#0A0A0A 0%,#1A0800 40%,#2A1000 100%)"
               height="420px"
+              overlayOpacity={0.4}
+              glowColor="rgba(201,140,50,0.15)"
             />
           </Reveal>
         </div>

@@ -85,7 +85,10 @@ export const LeasingPaths = () => {
                               </li>
                             ))}
                           </ul>
-                          <button className="group inline-flex items-center gap-2 text-gold font-medium hover:gap-4 transition-all">
+                          <button 
+                            onClick={() => document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth" })}
+                            className="group inline-flex items-center gap-2 text-gold font-medium hover:gap-4 transition-all"
+                          >
                             Schedule a Tour
                             <ArrowRight size={16} />
                           </button>
