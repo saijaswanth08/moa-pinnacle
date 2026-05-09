@@ -1,4 +1,5 @@
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
 import { Reveal } from "./Reveal";
 import { Particles } from "./Particles";
@@ -29,8 +30,9 @@ export const Closing = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     const r = schema.safeParse(form);
     if (!r.success) {
@@ -40,11 +42,30 @@ export const Closing = () => {
       return;
     }
     setErrors({});
+    setErrorMessage(null);
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
+
+    try {
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          from_name: form.name,
+          company: form.company,
+          from_email: form.email,
+          phone: form.phone || "Not provided",
+          interest: form.interest,
+          message: form.message || "No message provided",
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
       setSuccess(true);
-    }, 1500);
+    } catch (error) {
+      console.error("EmailJS error:", error);
+      setErrorMessage("Something went wrong. Please email us at moa.supportt@gmail.com");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -166,6 +187,11 @@ export const Closing = () => {
                     >
                       {submitting ? "Sending..." : "Send Inquiry →"}
                     </button>
+                    {errorMessage && (
+                      <p className="text-center text-sm mt-4" style={{ color: "#E24B4A" }}>
+                        {errorMessage}
+                      </p>
+                    )}
                     <p className="text-center text-xs mt-4" style={{ color: "#A0A0A0" }}>
                       Our leasing team responds within 24 hours.
                     </p>
