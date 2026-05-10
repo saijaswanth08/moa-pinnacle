@@ -3,7 +3,7 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 import { useState } from "react";
 
 export const Hero = () => {
-  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
   const go = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
   return (
@@ -23,9 +23,19 @@ export const Hero = () => {
           style={{ 
             backgroundImage: 'url("/images/retail-corridor.png")',
             filter: "brightness(0.7) contrast(1.1)",
-            opacity: isVideoLoaded ? 0 : 0.6
+            opacity: videoLoaded ? 0 : 0.6
           }}
         />
+
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          background: "#0A0A0A",
+          zIndex: 5,
+          transition: "opacity 0.8s ease",
+          opacity: videoLoaded ? 0 : 1,
+          pointerEvents: "none"
+        }} />
         
         <video
           autoPlay
@@ -33,8 +43,8 @@ export const Hero = () => {
           loop
           playsInline
           preload="auto"
-          onCanPlay={() => setIsVideoLoaded(true)}
-          className={`w-full h-full object-cover scale-110 transition-opacity duration-1000 ${isVideoLoaded ? 'opacity-60' : 'opacity-0'}`}
+          onCanPlay={() => setVideoLoaded(true)}
+          className={`w-full h-full object-cover scale-110 transition-opacity duration-1000 ${videoLoaded ? 'opacity-60' : 'opacity-0'}`}
           style={{ filter: "brightness(0.7) contrast(1.1)" }}
         >
           <source src="/videos/hero-bg.webm" type="video/webm" />
