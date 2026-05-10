@@ -1,5 +1,6 @@
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
+import { supabase } from '../../lib/supabase';
 import { motion } from "framer-motion";
 import { Reveal } from "./Reveal";
 import { Particles } from "./Particles";
@@ -60,6 +61,18 @@ export const Closing = () => {
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
       setSuccess(true);
+      try {
+        await supabase.from('inquiries').insert({
+          name: form.name,
+          company: form.company,
+          email: form.email,
+          phone: form.phone || null,
+          interest: form.interest,
+          message: form.message || null
+        })
+      } catch (dbError) {
+        console.error('Supabase insert error:', dbError)
+      }
     } catch (error) {
       console.error("EmailJS error:", error);
       setErrorMessage("Something went wrong. Please email us at moa.supportt@gmail.com");
