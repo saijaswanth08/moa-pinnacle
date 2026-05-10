@@ -101,6 +101,32 @@ export const LeasingPaths = () => {
             );
           })}
         </div>
+
+        <div style={{ textAlign: "center", marginTop: "48px" }}>
+          <a
+            href="/MOA1.pdf"
+            download="MOA-Property-Overview.pdf"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+              padding: "14px 32px",
+              background: "#C9A84C",
+              color: "#000",
+              borderRadius: "8px",
+              textDecoration: "none",
+              fontWeight: "600",
+              fontFamily: "Inter",
+              fontSize: "14px",
+              letterSpacing: "0.5px"
+            }}
+          >
+            ↓ Download Property Overview
+          </a>
+          <p style={{ color: "#A0A0A0", fontSize: "12px", marginTop: "12px" }}>
+            8-page property overview · PDF · 19KB
+          </p>
+        </div>
       </div>
     </section>
   );
